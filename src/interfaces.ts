@@ -1,4 +1,4 @@
-interface Asset {
+export interface Asset {
   symbol: string;
   name: string;
   price: number;
@@ -11,7 +11,7 @@ interface Asset {
   imageUrl?: string;
 }
 
-interface Market {
+export interface Market {
   baseAsset: Asset;
   quoteAsset: Asset;
   lastPrice: number;
@@ -22,7 +22,7 @@ interface Market {
   quoteVolume: number;
 }
 
-interface Order {
+export interface Order {
   market: Market;
   side: "buy" | "sell";
   price: number;
