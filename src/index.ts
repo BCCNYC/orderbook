@@ -1,11 +1,17 @@
 import express from "express";
-const app = express();
+const server = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
+import assetRouter from './asset/asset-router.js';
+import marketRouter from './market/market-router.js';
+
+server.use('/asset', assetRouter);
+server.use('/market', marketRouter);
+
+server.get("/", (req, res) => {
   res.send("I AM WORKING YESS");
 });
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });

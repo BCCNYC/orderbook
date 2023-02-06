@@ -1,6 +1,15 @@
+import express from 'express'
+const router = express.Router();
+
+router.get('/', (req,res) => {
+    res.send('I am the market router')
+})
+
+export default router;
+
 // import express from 'express';
 // import redis from 'redis';
-// import { Market } from 'interfaces';
+// import { Market } from './interfaces';
 
 // const client = redis.createClient();
 // const router = express.Router();

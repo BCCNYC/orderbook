@@ -1,3 +1,12 @@
+import express from 'express'
+const router = express.Router();
+
+router.get('/', (req,res) => {
+    res.send('I am the asset router')
+})
+
+export default router;
+// export default testObject
 // const client = redis.createClient();
 // const router = express.Router();
 
