@@ -1,0 +1,24 @@
+{
+  "name": "orderbook",
+  "version": "1.0.0",
+  "description": "An orderbook",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BCCNYC/orderbook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BCCNYC/orderbook/issues"
+  },
+  "homepage": "https://github.com/BCCNYC/orderbook#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
