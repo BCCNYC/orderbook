@@ -27,22 +27,24 @@ export const assets = [
   },
 ] as Asset[];
 
-export const market = {
-  id: 1,
-  baseAssetId: 0,
-  quoteAssetId: 1,
-  baseVolume: 21039847289037482934,
-  highestBid: 321847238947,
-  lastPrice: 11,
-  lowestAsk: 2,
-  percentChange: 2,
-  quoteVolume: 210942140,
-} as Market;
+export const markets = [
+  {
+    id: 0,
+    baseAssetId: 0,
+    quoteAssetId: 1,
+    baseVolume: 21039847289037482934,
+    highestBid: 321847238947,
+    lastPrice: 11,
+    lowestAsk: 2,
+    percentChange: 2,
+    quoteVolume: 210942140,
+  },
+] as Market[];
 
 export const orders = [
   {
     id: 0,
-    marketId: 1,
+    marketId: 0,
     side: "buy",
     price: 243455,
     volume: 22,
@@ -51,7 +53,7 @@ export const orders = [
   },
   {
     id: 1,
-    marketId: 1,
+    marketId: 0,
     side: "sell",
     price: 243455,
     volume: 5,
