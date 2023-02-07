@@ -1,11 +1,12 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 
 import assetRouter from "./routers/asset/asset-router.js";
 import marketRouter from "./routers/market/market-router.js";
 
 const server = express();
-const port = 3000;
-
+const port = process.env.PORT;
 // Middleware
 server.use(express.json());
 
