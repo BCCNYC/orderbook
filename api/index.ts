@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-
+import redis from "./redis.js";
 import assetRouter from "./routers/asset/asset-router.js";
 import marketRouter from "./routers/market/market-router.js";
 
@@ -17,6 +17,7 @@ server.use("/market", marketRouter);
 server.get("/", (req, res) => {
   res.status(201).json({ message: "initial request succesful" });
 });
+console.log(await redis.ping());
 
 // Global Error Handler
 server.use((err, req, res, next) => {
