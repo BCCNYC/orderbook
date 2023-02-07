@@ -1,48 +1,16 @@
-import express from 'express'
+import express from "express";
+import redis from "../../redis.js";
+
 const router = express.Router();
 
-router.get('/', (req,res) => {
-    res.send('I am the asset router')
-})
+router.get("/", (req, res, next) => {
+  redis.smembers("asssets", (error, result) => {
+    if (error) {
+      next({ status: 404, message: "could not fetch assets" });
+    } else {
+      res.json(result.map((asset) => JSON.parse(asset)));
+    }
+  });
+});
 
 export default router;
-// export default testObject
-// const client = redis.createClient();
-// const router = express.Router();
-
-// router.post("/", (req, res) => {
-//   const {
-//     symbol,
-//     name,
-//     price,
-//     marketCap,
-//     volume24h,
-//     circulatingSupply,
-//     maxSupply,
-//     change24h,
-//     rank,
-//     imageUrl,
-//   } = req.body;
-
-//   const asset: Asset = {
-//     symbol,
-//     name,
-//     price,
-//     marketCap,
-//     volume24h,
-//     circulatingSupply,
-//     maxSupply,
-//     change24h,
-//     rank,
-//     imageUrl,
-//   };
-
-//   client.hmset(`asset:${symbol}`, asset, (err) => {
-//     if (err) {
-//       return res.status(500).send(err.message);
-//     }
-//     return res.status(201).send(`Asset ${symbol} created.`);
-//   });
-// });
-
-// export default router;
