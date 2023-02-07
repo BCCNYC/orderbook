@@ -1,19 +1,20 @@
 export interface Asset {
+  id: number;
   symbol: string;
   name: string;
   price: number;
   marketCap: number;
   volume24h: number;
   circulatingSupply: number;
-  maxSupply?: number;
+  maxSupply: number;
   change24h: number;
-  rank: number;
   imageUrl?: string;
 }
 
 export interface Market {
-  baseAsset: Asset;
-  quoteAsset: Asset;
+  id: number;
+  baseAssetId: number;
+  quoteAssetId: number;
   lastPrice: number;
   lowestAsk: number;
   highestBid: number;
@@ -23,7 +24,8 @@ export interface Market {
 }
 
 export interface Order {
-  market: Market;
+  id: number;
+  marketId: number;
   side: "buy" | "sell";
   price: number;
   volume: number;
