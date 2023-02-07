@@ -1,8 +1,8 @@
 import "dotenv/config";
 import express from "express";
 import redis from "./redis.js";
-import assetRouter from "./routers/asset/asset-router.js";
-import marketRouter from "./routers/market/market-router.js";
+import assetsRouter from "./routers/assets/assets-router.js";
+import marketsRouter from "./routers/markets/markets-router.js";
 
 const server = express();
 
@@ -10,8 +10,8 @@ const server = express();
 server.use(express.json());
 
 // Routers
-server.use("/asset", assetRouter);
-server.use("/market", marketRouter);
+server.use("/assets", assetsRouter);
+server.use("/markets", marketsRouter);
 
 // Sanity Check
 server.get("/", (req, res) => {
