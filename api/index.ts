@@ -3,6 +3,7 @@ import express from "express";
 import redis from "./redis.js";
 import assetsRouter from "./routers/assets/assets-router.js";
 import marketsRouter from "./routers/markets/markets-router.js";
+import ordersRouter from "./routers/orders/orders-router.js";
 
 const server = express();
 
@@ -12,6 +13,7 @@ server.use(express.json());
 // Routers
 server.use("/assets", assetsRouter);
 server.use("/markets", marketsRouter);
+server.use("/orders", ordersRouter);
 
 // Sanity Check
 server.get("/", (req, res) => {

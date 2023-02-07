@@ -3,12 +3,12 @@ import redis from "../../redis.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", (req, rest, next) => {
   redis.smembers("markets", (error, result) => {
     if (error) {
-      res.json({ status: 404, message: "could not grab market" });
+      next({ status: 404, message: "could not feth markets" });
     } else {
-      res.json(result.map((market) => JSON.parse(market)));
+      rest.json(result.map((market) => JSON.parse(market)));
     }
   });
 });
