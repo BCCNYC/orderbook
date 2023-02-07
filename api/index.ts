@@ -1,12 +1,11 @@
-import * as dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 import express from "express";
 
 import assetRouter from "./routers/asset/asset-router.js";
 import marketRouter from "./routers/market/market-router.js";
 
 const server = express();
-const port = process.env.PORT;
+
 // Middleware
 server.use(express.json());
 
@@ -27,6 +26,6 @@ server.use((err, req, res, next) => {
   });
 });
 
-server.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+server.listen(process.env.PORT, () => {
+  console.log(`Server listening on port ${process.env.PORT}`);
 });
