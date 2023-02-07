@@ -1,5 +1,5 @@
 import { Redis } from "ioredis";
-import { assets } from "./dummydata.js";
+import { assets } from "./dummyData.js";
 const redis = new Redis(process.env.REDIS_URL);
 
 // seeding redis
