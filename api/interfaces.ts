@@ -1,6 +1,5 @@
 export interface Asset {
-  id: number;
-  symbol: string;
+  ticker: string;
   name: string;
   price: number;
   marketCap: number;
@@ -11,24 +10,25 @@ export interface Asset {
   imageUrl?: string;
 }
 
-export interface Market {
-  id: number;
-  baseAssetId: number;
-  quoteAssetId: number;
-  lastPrice: number;
-  lowestAsk: number;
-  highestBid: number;
-  percentChange: number;
-  baseVolume: number;
-  quoteVolume: number;
-}
-
 export interface Order {
   id: number;
-  marketId: number;
   side: "buy" | "sell";
   price: number;
   volume: number;
   total: number;
   date: string;
 }
+
+export interface Market {
+  pair: string;
+  baseAsset: string;
+  quoteAsset: string;
+  lastPrice: number;
+  lowestAsk: number;
+  highestBid: number;
+  percentChange: number;
+  baseVolume: number;
+  quoteVolume: number;
+  orders?: Order[];
+}
+
