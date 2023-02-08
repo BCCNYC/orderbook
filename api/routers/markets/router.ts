@@ -3,20 +3,19 @@ import redis from "../../redis.js";
 import { Market } from "../../interfaces.js";
 const router = express.Router();
 import { Request } from "express";
+import { validateNewMarket, uniqueMarket } from "./middleware.js";
 
-// req doesn't get the types imported from middleware applied so I am manually doing it
 interface RequestType extends Request {
   markets: Market[];
 }
 
 // fetches all markets
 router.get("/", (req: RequestType, res, next) => {
-  redis.smembers("markets", (error, result) => {
-    res.json(req.markets);
-  });
+  res.json(req.markets);
 });
 
 // fetches market by pair
+
 router.get(
   "/:pair",
   (req: RequestType & { params: { pair: string } }, res, next) => {
@@ -29,5 +28,24 @@ router.get(
     });
   }
 );
+
+// post a market into the api
+router.post("/", validateNewMarket, uniqueMarket, (req: RequestType, res, next) => {
+  redis.sadd("markets", JSON.stringify({...req.body, orders:[]}), (error, result) => {
+    if (error) {
+      next({ error });
+    } else {
+      res.json(req.body);
+    }
+  });
+});
+
+// PUT: update a market given the PAIR
+
+// delete a market given the PAIR
+
+// POST an ORDER into a market
+
+// DELETE an order from a market
 
 export default router;
