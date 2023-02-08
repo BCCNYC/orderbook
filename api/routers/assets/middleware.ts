@@ -1,16 +1,13 @@
-import express from "express";
 import redis from "../../redis.js";
+import { Asset } from "../../interfaces.js";
 
-const router = express.Router();
-
-router.get("/", (req, res, next) => {
+export const deserializeAssets = (req, res, next) => {
   redis.smembers("assets", (error, result) => {
     if (error) {
       next({ status: 404, message: "could not fetch assets" });
     } else {
-      res.json(result.map((asset) => JSON.parse(asset)));
+      req.assets = result.map((market) => JSON.parse(market)) as Asset[];
+      next();
     }
   });
-});
-
-export default router;
+};

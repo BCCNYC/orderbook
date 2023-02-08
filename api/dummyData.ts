@@ -27,7 +27,7 @@ export const assets = [
 
 export const markets = [
   {
-    pair: "BTC/USDC",
+    pair: "BTC-USDC",
     baseAsset: "BTC",
     quoteAsset: "USDC",
     baseVolume: 21039847289037482934,
@@ -53,6 +53,6 @@ export const markets = [
         total: 23,
         date: `${Date.now()}`,
       },
-    ] 
+    ],
   },
 ] as Market[];
