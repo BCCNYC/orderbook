@@ -4,13 +4,14 @@ import redis from "./redis.js";
 import assetsRouter from "./routers/assets/router.js";
 import marketsRouter from "./routers/markets/router.js";
 import { deserializeMarkets } from "./routers/markets/middleware.js";
+import { deserializeAssets } from "./routers/assets/middleware.js";
 const server = express();
 
 // Middleware
 server.use(express.json());
 
 // Routers
-server.use("/assets", assetsRouter);
+server.use("/assets", deserializeAssets, assetsRouter);
 server.use("/markets", deserializeMarkets, marketsRouter);
 
 // Sanity Check
