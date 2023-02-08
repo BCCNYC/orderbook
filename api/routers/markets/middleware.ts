@@ -1,7 +1,7 @@
 import redis from "../../redis.js";
 import { Market } from "../../interfaces.js";
 
-export const deserializeMarket = (req, res, next) => {
+export const deserializeMarkets = (req, res, next) => {
   redis.smembers("markets", (error, result) => {
     if (error) {
       next({ status: 404, message: "could not fetch markets" });
