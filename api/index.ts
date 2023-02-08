@@ -1,9 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import redis from "./redis.js";
-import assetsRouter from "./routers/assets/assets-router.js";
-import marketsRouter from "./routers/markets/markets-router.js";
-
+import assetsRouter from "./routers/assets/router.js";
+import marketsRouter from "./routers/markets/router.js";
+import { deserializeMarket } from "./routers/markets/middleware.js";
 const server = express();
 
 // Middleware
@@ -11,7 +11,7 @@ server.use(express.json());
 
 // Routers
 server.use("/assets", assetsRouter);
-server.use("/markets", marketsRouter);
+server.use("/markets", deserializeMarket, marketsRouter);
 
 // Sanity Check
 server.get("/", (req, res) => {
