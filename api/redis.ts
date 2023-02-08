@@ -1,5 +1,5 @@
 import { Redis } from "ioredis";
-import { assets, markets, orders } from "./dummyData.js";
+import { assets, markets } from "./dummyData.js";
 const redis = new Redis(process.env.REDIS_URL);
 
 // seeding redis
@@ -11,8 +11,6 @@ markets.forEach(async (market) => {
   await redis.sadd("markets", JSON.stringify(market));
 });
 
-orders.forEach(async (order) => {
-  await redis.sadd("orders", JSON.stringify(order));
-});
+
 
 export default redis;
