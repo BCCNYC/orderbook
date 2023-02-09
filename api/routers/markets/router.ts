@@ -3,7 +3,7 @@ import redis from "../../redis.js";
 import { Market } from "../../interfaces.js";
 const router = express.Router();
 import { Request } from "express";
-import { validateNewMarket, uniqueMarket } from "./middleware.js";
+import { validateBody, uniqueMarket } from "./middleware.js";
 
 interface RequestType extends Request {
   markets: Market[];
@@ -30,14 +30,18 @@ router.get(
 );
 
 // post a market into the api
-router.post("/", validateNewMarket, uniqueMarket, (req: RequestType, res, next) => {
-  redis.sadd("markets", JSON.stringify({...req.body, orders:[]}), (error, result) => {
-    if (error) {
-      next({ error });
-    } else {
-      res.json(req.body);
+router.post("/", validateBody, uniqueMarket, (req: RequestType, res, next) => {
+  redis.sadd(
+    "markets",
+    JSON.stringify({ ...req.body, orders: [] }),
+    (error, result) => {
+      if (error) {
+        next({ error });
+      } else {
+        res.json(req.body);
+      }
     }
-  });
+  );
 });
 
 // PUT: update a market given the PAIR

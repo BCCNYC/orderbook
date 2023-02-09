@@ -13,21 +13,7 @@ export const deserializeMarkets = (req, res, next) => {
   });
 };
 
-export const uniqueMarket = (
-  req: Request & { markets: Market[]; body: Market },
-  res,
-  next
-) => {
-  req.markets.forEach((market) => {
-    if (market.pair === req.body.pair) {
-      next({ status: 400, message: "duplicate body" });
-    } else {
-      next();
-    }
-  });
-};
-
-export const validateNewMarket = (req, res, next) => {
+export const validateBody = (req, res, next) => {
   const {
     baseAsset,
     baseVolume,
@@ -70,4 +56,18 @@ export const validateNewMarket = (req, res, next) => {
       }
     });
   }
+};
+
+export const uniqueMarket = (
+  req: Request & { markets: Market[]; body: Market },
+  res,
+  next
+) => {
+  req.markets.forEach((market) => {
+    if (market.pair === req.body.pair) {
+      next({ status: 400, message: "duplicate body" });
+    } else {
+      next();
+    }
+  });
 };
