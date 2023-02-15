@@ -97,6 +97,34 @@ class Order:
     def __str__(self):
         pass
 
+#Top of Orderbook Object
+
+class Top:
+    def __init__(self, market=Market(), depth=1):
+        self.__market = market
+        self.__depth = depth
+        self.__lowestAsks = []
+        self.__highestBids = []
+
+    def addAsk(self, price, volume):
+        if len(self.__lowestAsks) < depth:
+            self.__lowestAsks.append((price, volume))
+            self.__lowestAsks = sorted(self.__lowestAsks, key=lambda x: x[0]) #sort by lowest ask
+        if self.__lowestAsks[depth - 1][0] > price:
+            self.__lowestAsks[depth - 1] = (price, volume) #replace highest ask with this ask if this ask's price is lower
+
+    def addBid(self, price, volume):
+        if len(self.__highestBids) < depth:
+            self.__highestBids.append((price, volume))
+            self.__highestBids = sorted(self.__highestBids, key = lambda x: x[0], reverse=True)  #sort by highest bids
+        if self.__highestBids[depth - 1][0] < price:
+            self.__highestBids[depth - 1] = (price, volume) #replace lowest bid with this bid if this bid is higher
+
+    def addOrder(self, order: Order):
+        if order.get_side() == 1:
+            self.addAsk(order.get_price(), order.get_volume()) #sell side order
+        else:
+            self.addBid(order.get_price(), order.get_volume()) #buy side order
 
 def main():
     print("OrderBook")
