@@ -9,6 +9,7 @@ Create Order BOOK
 # create 3 separate databases for Asset, Market, Order
 # Using Redis, and is under one cluster
 
+from flask import Flask
 
 # Asset Object
 class Asset:
@@ -110,6 +111,7 @@ class Top:
     def get_depth(self): return self.__depth
     def get_asks(self): return self.__lowestAsks
     def get_bids(self): return self.__highestBids
+    def get_top(self): return {"lowest_asks": self.__lowestAsks, "highest_bids": self.__highestBids}
 
     def addAsk(self, price, volume):
         if len(self.__lowestAsks) < depth:
@@ -138,13 +140,18 @@ class Top:
             self.addBid(order.get_price(), order.get_volume()) #buy side order
 
 
-def main():
-    print("OrderBook")
-    market = Market()
+app = Flask(__name__)
+
+@app.route('/asset/new', methods=['POST'])
+def create_asset():
+    asset_json = request.get_json(force=True)
+    if not ("name" in asset_json) or not ("symbol" in asset_json):
+        raise ValueError("POST request to /asset/new requires name and symbol in JSON headers")
+    new_asset = Asset(name = asset_json["name"], symbol = asset_json["symbol"])
+    return new_asset #we need to store this in Redis 
 
 
 
-main()
 
 
 '''
